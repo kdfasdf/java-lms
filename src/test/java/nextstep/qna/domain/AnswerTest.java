@@ -24,14 +24,14 @@ public class AnswerTest {
     @Test
     @DisplayName("다른 사람의 답변이 있는글을 삭제하려고 하면 예외가 발생한다")
     void 다른_사람이_쓴_답변일_경우_삭제_불가() {
-        assertThatThrownBy(() ->A1.validEachAnswerWrittenByMe(A2.getWriter()))
+        assertThatThrownBy(() -> A1.validEachAnswerWrittenByMe(A2.getWriter()))
                 .isInstanceOf(CannotDeleteException.class)
                 .hasMessage("다른 사람이 쓴 답변이 있어 삭제할 수 없습니다.");
     }
 
     @Test
     @DisplayName("내가 쓴 답변을 삭제하면 Answer의 상태가 삭제상태로 바뀐다")
-    void 내가_쓴_답변_삭제_후_상태는_true () throws CannotDeleteException {
+    void 내가_쓴_답변_삭제_후_상태는_true() throws CannotDeleteException {
         A1.delete(NsUserTest.JAVAJIGI);
 
         assertThat(A1.isDeleted()).isTrue();

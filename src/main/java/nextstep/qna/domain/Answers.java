@@ -12,12 +12,6 @@ public class Answers {
         this.answers = answers;
     }
 
-    public void postHasAnswersWrittenByMe (NsUser nsUser) throws CannotDeleteException {
-        for(Answer answer : answers) {
-            answer.validEachAnswerWrittenByMe(nsUser);
-        }
-    }
-
     public List<DeleteHistory> delete(NsUser nsUser, List<DeleteHistory> deleteHistories) throws CannotDeleteException {
         for (Answer answer : answers) {
             deleteHistories.add(answer.delete(nsUser));
@@ -32,4 +26,5 @@ public class Answers {
     public int getNumberOfAnswers() {
         return answers.size();
     }
+
 }

@@ -45,13 +45,14 @@ public class QuestionTest {
     @DisplayName("질문자와 답변글의 모든 답변자가 같은 경우 삭제 가능")
     void 질문자와_답변글의_모든_답변자가_같으면_삭제가능() throws CannotDeleteException {
         final Question question = new Question(NsUserTest.JAVAJIGI, "title1", "contents1");
+        question.addAnswer(new Answer(NsUserTest.JAVAJIGI, QuestionTest.Q1, "Answers Contents1"));
+        question.addAnswer(new Answer(NsUserTest.JAVAJIGI, QuestionTest.Q1, "Answers Contents1"));
 
-        question.addAnswer(new Answer(NsUserTest.JAVAJIGI, QuestionTest.Q1, "Answers Contents1"));
-        question.addAnswer(new Answer(NsUserTest.JAVAJIGI, QuestionTest.Q1, "Answers Contents1"));
         question.delete(Q1.getWriter());
 
         assertThat(question.isDeleted()).isTrue();
     }
+
     @Test
     @DisplayName("질문자와 답변글의 모든 답변자가 같은 경우 삭제 가능")
     void 질문자와_답변글의_답변자가_다르면_삭제_불가능() throws CannotDeleteException {
