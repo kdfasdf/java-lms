@@ -8,21 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
-    private Long id;
 
     private String title;
 
     private String contents;
 
-    private NsUser writer;
-
     private Answers answers = new Answers(new ArrayList<>());
 
     private boolean deleted = false;
 
-    private LocalDateTime createdDate = LocalDateTime.now();
-
     private LocalDateTime updatedDate;
+
+    private QuestionIdentificationInfo questionIdentificationInfo;
 
     public Question() {
     }
@@ -32,14 +29,13 @@ public class Question {
     }
 
     public Question(Long id, NsUser writer, String title, String contents) {
-        this.id = id;
-        this.writer = writer;
         this.title = title;
         this.contents = contents;
+        this.questionIdentificationInfo = new QuestionIdentificationInfo(id, writer);
     }
 
     public Long getId() {
-        return id;
+        return questionIdentificationInfo.getId();
     }
 
     public String getTitle() {
@@ -61,7 +57,7 @@ public class Question {
     }
 
     public NsUser getWriter() {
-        return writer;
+        return questionIdentificationInfo.getWriter();
     }
 
     public void addAnswer(Answer answer) {
@@ -70,7 +66,7 @@ public class Question {
     }
 
     public boolean isOwner(NsUser loginUser) {
-        return writer.equals(loginUser);
+        return questionIdentificationInfo.isOwner(loginUser);
     }
 
     public Question setDeleted(boolean deleted) {
@@ -88,7 +84,7 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question [id=" + getId() + ", title=" + title + ", contents=" + contents + ", writer=" + writer + "]";
+        return "Question [id=" + getId() + ", title=" + title + ", contents=" + contents + ", writer=" + this.getWriter() + "]";
     }
 
     public void validIfUserCanDeletePost(NsUser nsUser) throws CannotDeleteException {
