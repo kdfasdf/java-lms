@@ -35,7 +35,7 @@ public class AnswersTest {
         answers.add(A2);
 
         assertThatThrownBy(()
-                -> answers.delete(A2.getWriter(), new ArrayList<>())).
+                -> answers.delete(A2.getWriter())).
                 isInstanceOf(CannotDeleteException.class)
                 .hasMessage("다른 사람이 쓴 답변이 있어 삭제할 수 없습니다.");
     }
@@ -48,7 +48,7 @@ public class AnswersTest {
         answers.add(A1);
         answers.add(A1);
 
-        List<DeleteHistory> deleteHistories = answers.delete(A1.getWriter(), new ArrayList<>());
+        List<DeleteHistory> deleteHistories = answers.delete(A1.getWriter());
 
         assertThat(deleteHistories).hasSize(2);
     }

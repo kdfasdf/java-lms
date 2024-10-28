@@ -99,14 +99,14 @@ public class Question {
 
     public List<DeleteHistory> delete(NsUser nsUser) throws CannotDeleteException {
         validIfUserCanDeletePost(nsUser);
-        return answers.delete(nsUser, saveQuestionDeleteHistory());
+        this.setDeleted(true);
+        return saveDeleteHistoriesOfQuestionAndItsAnswers(nsUser);
     }
 
-    public List<DeleteHistory> saveQuestionDeleteHistory() {
+    private List<DeleteHistory> saveDeleteHistoriesOfQuestionAndItsAnswers(NsUser nsUser) throws CannotDeleteException {
         List<DeleteHistory> deleteHistories = new ArrayList<>();
-        this.setDeleted(true);
-        deleteHistories.add(
-                new DeleteHistory(ContentType.QUESTION, this.getId(), this.getWriter(), LocalDateTime.now()));
+        deleteHistories.add(new DeleteHistory(ContentType.QUESTION, this.getId(), this.getWriter(), LocalDateTime.now()));
+        deleteHistories.addAll(answers.delete(nsUser));
         return deleteHistories;
     }
 
