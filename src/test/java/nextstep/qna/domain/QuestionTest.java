@@ -54,7 +54,7 @@ public class QuestionTest {
     }
 
     @Test
-    @DisplayName("질문자와 답변글의 모든 답변자가 같은 경우 삭제 가능")
+    @DisplayName("질문자와 답변글의 모든 답변자가 다르면 삭제 불가능")
     void 질문자와_답변글의_답변자가_다르면_삭제_불가능() throws CannotDeleteException {
         final Question question = new Question(NsUserTest.JAVAJIGI, "title1", "contents1");
 
