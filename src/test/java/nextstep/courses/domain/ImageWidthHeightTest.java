@@ -7,6 +7,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ImageWidthHeightTest {
+
+    public static final ImageWidthHeight standardImageWidthHeight = new ImageWidthHeight(300,200);
+
     @Test
     @DisplayName("width는 300 이상이어야 함")
     void 너비_300_이상() {

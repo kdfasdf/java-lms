@@ -7,6 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class ImageSizeTest {
+
+    public static final ImageSize standardImageSize = new ImageSize(1024 * 1024);
+
     @ParameterizedTest
     @ValueSource(ints = {1024 * 1024, 1})
     @DisplayName("이미지의 크기가 1MB 이하일 때 통과한다")
