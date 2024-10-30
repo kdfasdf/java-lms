@@ -1,96 +1,63 @@
 package nextstep.courses.domain;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import nextstep.payments.domain.Payment;
 import nextstep.users.domain.NsUser;
 
 public class Session {
     private final Long sessionId;
     private final Image image;
-    private final SessionType sessionType;
-    private final SessionStatus sessionStatus;
-    private final List<NsUser> students = new ArrayList<>();
-    private final List<Payment> payments = new ArrayList<>();
-    private final LocalDateTime startDate = LocalDateTime.now();
-
-    private LocalDateTime endDate;
-    private long price;
-    private int maxStudents;
+    private final SessionDuration sessionDuration = new SessionDuration();
+    private final SessionInfo sessionInfo;
+    private final SessionRegisterInfo sessionRegisterInfo;
 
 
     public static Session createSession(Long id, Image image, SessionType sessionType, SessionStatus sessionStatus,
-                                        int price, int maxStudents) {
+                                        Long price, Integer maxStudentCount) {
         if (sessionType == SessionType.PAID) {
-            return new Session(id, image, sessionType, sessionStatus, price, maxStudents);
+            return new Session(id, image, sessionType, sessionStatus, price, maxStudentCount);
         }
         return new Session(id, image, sessionType, sessionStatus);
     }
 
-    private Session(Long sessionId, Image image, SessionType sessionType, SessionStatus sessionStatus, int price,
-                    int maxStudents) {
+    private Session(Long sessionId, Image image, SessionType sessionType, SessionStatus sessionStatus, Long price,
+                    Integer maxStudents) {
         this.sessionId = sessionId;
         this.image = image;
-        this.sessionType = sessionType;
         sessionType.validate(price, maxStudents);
-        this.sessionStatus = sessionStatus;
-        this.price = price;
-        this.maxStudents = maxStudents;
+        this.sessionInfo = new SessionInfo(sessionType, price, maxStudents);
+        this.sessionRegisterInfo = new SessionRegisterInfo(sessionStatus);
     }
 
     private Session(Long sessionId, Image image, SessionType sessionType, SessionStatus sessionStatus) {
-        this(sessionId, image, sessionType, sessionStatus, 0, Integer.MAX_VALUE);
+        this(sessionId, image, sessionType, sessionStatus, 0L, Integer.MAX_VALUE);
     }
 
     public long getPrice() {
-        return this.price;
+        return sessionInfo.getPrice();
     }
 
     public int getMaxStudents() {
-        return this.maxStudents;
+        return sessionInfo.getMaxStudents();
     }
 
     public void register(NsUser nsUser, long payment) {
-        registterStudent(nsUser, payment);
-        addPaymentHistory(nsUser, payment);
+        registerStudent(nsUser, payment);
+        sessionRegisterInfo.addPaymentHistory(nsUser, payment, sessionId);
     }
 
-    private void addPaymentHistory(NsUser nsUser, long payment) {
-        payments.add(new Payment("", sessionId, nsUser.getId(), payment));
-    }
 
-    public void registterStudent(NsUser nsUser, long payment) {
-        checkSessionIsRegistering();
-        checkPaymentEqualsPrice(payment);
-        checkCurrentNumberOfStudentsMax(getNumberOfStudents());
-        students.add(nsUser);
-    }
-
-    private void checkCurrentNumberOfStudentsMax(int numberOfStudents) {
-        if (numberOfStudents == maxStudents) {
-            throw new IllegalArgumentException("수강 정원이 모두 찼습니다.");
-        }
-    }
-
-    private void checkSessionIsRegistering() {
-        if (sessionStatus != SessionStatus.REGISTER) {
-            throw new IllegalArgumentException("이 강의는 지금 모집중인 상태가 아닙니다");
-        }
-    }
-
-    private void checkPaymentEqualsPrice(long payment) {
-        if (sessionType == SessionType.PAID && price != payment) {
-            throw new IllegalArgumentException("수강료와 가격이 일치하지 않습니다");
-        }
+    public void registerStudent(NsUser nsUser, long payment) {
+        sessionRegisterInfo.checkSessionIsRegistering();
+        sessionInfo.checkPaymentEqualsPrice(payment);
+        sessionInfo.checkCurrentNumberOfStudentsIsMax(getNumberOfStudents());
+        sessionRegisterInfo.addStudent(nsUser);
     }
 
     public int getNumberOfStudents() {
-        return students.size();
+        return sessionRegisterInfo.getNumberOfStudents();
     }
 
     public int getNumberOfPayments() {
-        return payments.size();
+        return sessionRegisterInfo.getNumberOfPayments();
     }
 
 }

@@ -14,11 +14,11 @@ public enum SessionType {
 
     private final BiConsumer validator;
 
-    SessionType(BiConsumer<Integer, Integer> validateRelatedType) {
+    SessionType(BiConsumer<Long, Integer> validateRelatedType) {
         this.validator = validateRelatedType;
     }
 
-    private static void validPaidSessionPriceIsNotZeroOrNegative(Integer price) {
+    private static void validPaidSessionPriceIsNotZeroOrNegative(Long price) {
         if (price <= SessionType.Constants.FREE) {
             throw new IllegalArgumentException("유료강의의 강의는 1원 이상이어야 합니다.");
         }
@@ -30,8 +30,8 @@ public enum SessionType {
         }
     }
 
-    private static void validFreeSessionIsFree(Integer price) {
-        if (price != 0) {
+    private static void validFreeSessionIsFree(Long price) {
+        if (price != 0L) {
             throw new IllegalArgumentException("무료 강의의 가격은 0원이어야 합니다");
         }
     }
@@ -42,7 +42,7 @@ public enum SessionType {
         }
     }
 
-    public void validate(Integer price, Integer maxStudentCount) {
+    public void validate(Long price, Integer maxStudentCount) {
         validator.accept(price, maxStudentCount);
     }
 
