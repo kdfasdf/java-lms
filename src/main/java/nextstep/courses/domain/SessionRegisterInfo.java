@@ -1,14 +1,11 @@
 package nextstep.courses.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import nextstep.payments.domain.Payment;
 import nextstep.users.domain.NsUser;
 
 public class SessionRegisterInfo {
     private final SessionStatus sessionStatus;
-    private final List<NsUser> students = new ArrayList<>();
-    private final List<Payment> payments = new ArrayList<>();
+    private final Students students = new Students();
+    private final Payments payments = new Payments();
     public SessionRegisterInfo(SessionStatus sessionStatus) {
         this.sessionStatus = sessionStatus;
     }
@@ -21,19 +18,19 @@ public class SessionRegisterInfo {
     }
 
     public void addStudent(NsUser nsUser) {
-        students.add(nsUser);
+        students.addStudent(nsUser);
     }
 
     public void addPaymentHistory(NsUser nsUser, long payment, Long sessionId) {
-        payments.add(new Payment("", sessionId, nsUser.getId(), payment));
+        payments.addPaymentHistory(nsUser, payment, sessionId);
     }
 
     public int getNumberOfStudents() {
-        return students.size();
+        return students.getNumberOfStudents();
     }
 
     public int getNumberOfPayments() {
-        return payments.size();
+        return payments.getNumberOfPayments();
     }
 
 }

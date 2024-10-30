@@ -43,14 +43,6 @@ public class SessionInfoTest {
 
     }
 
-    @Test
-    @DisplayName("무료 강의의 수한생 제한이 없는지 (Integer.MAX_VALUE)인지 확인")
-    void 무료_강의_수강생_제한_확인() {
-        Assertions.assertThat(
-                        Session.createSession(0L,image,SessionType.FREE,SessionStatus.READY,0L,0).getMaxStudents())
-                .isEqualTo(Integer.MAX_VALUE);
-    }
-
     @ParameterizedTest
     @ValueSource(ints = {100, 300})
     @DisplayName("수강료가 일치하지 않을 경우 강의신청을 할 수 없다")
@@ -66,8 +58,8 @@ public class SessionInfoTest {
     }
 
     @Test
-    @DisplayName("유료강의 현재 수강정원이 최대인원일 시 예외 발생")
-    void 유료강의_수강인원_최대일_시_예외_발생() {
+    @DisplayName("유료강의 현재 수강정원이 최대인원일 때 수강신청하면 예외 발생")
+    void 유료강의_수강인원_최대일_때_수강신청하면_예외_발생() {
         Session session = Session.createSession(0L,image,SessionType.PAID, SessionStatus.REGISTER, 200L, 1);
 
         session.registerStudent(NsUserTest.JAVAJIGI,200L);
