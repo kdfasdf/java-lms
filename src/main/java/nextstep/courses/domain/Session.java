@@ -35,10 +35,6 @@ public class Session {
         return sessionInfo.getPrice();
     }
 
-    public int getMaxStudents() {
-        return sessionInfo.getMaxStudents();
-    }
-
     public void register(NsUser nsUser, long payment) {
         registerStudent(nsUser, payment);
         sessionRegisterInfo.addPaymentHistory(nsUser, payment, sessionId);
