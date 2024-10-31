@@ -12,7 +12,7 @@ public class SessionInfo {
     }
 
     public void checkPaymentEqualsPrice(long payment) {
-        if (sessionType == SessionType.PAID && price != payment) {
+        if (sessionType.isPaid() && price != payment) {
             throw new IllegalArgumentException("수강료와 가격이 일치하지 않습니다");
         }
     }

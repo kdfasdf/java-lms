@@ -12,7 +12,7 @@ public enum SessionType {
         validMaxStudentIsIntegerMax(maxStudent);
     });
 
-    private final BiConsumer validator;
+    private final BiConsumer<Long, Integer> validator;
 
     SessionType(BiConsumer<Long, Integer> validateRelatedType) {
         this.validator = validateRelatedType;
@@ -37,13 +37,17 @@ public enum SessionType {
     }
 
     private static void validMaxStudentIsIntegerMax(Integer maxStudent) {
-        if(maxStudent < Integer.MAX_VALUE ) {
+        if (maxStudent < Integer.MAX_VALUE) {
             throw new IllegalArgumentException("무료강의는 수강생 제한이 없어야 합니다.");
         }
     }
 
     public void validate(Long price, Integer maxStudentCount) {
         validator.accept(price, maxStudentCount);
+    }
+
+    public boolean isPaid() {
+        return this == SessionType.PAID;
     }
 
     class Constants {

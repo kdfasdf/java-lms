@@ -125,6 +125,30 @@ public class NsUser {
     }
 
     @Override
+    public final boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof NsUser)) {
+            return false;
+        }
+
+        NsUser nsUser = (NsUser) o;
+        return id.equals(nsUser.id) && userId.equals(nsUser.userId) && password.equals(nsUser.password) && name.equals(
+                nsUser.name) && email.equals(nsUser.email);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + userId.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + email.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "NsUser{" +
                 "id=" + id +

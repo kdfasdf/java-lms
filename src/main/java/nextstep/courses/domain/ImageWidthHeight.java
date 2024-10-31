@@ -4,8 +4,9 @@ import nextstep.courses.exception.ImageHeightPixelException;
 import nextstep.courses.exception.ImageWidthPixelException;
 
 public class ImageWidthHeight {
-    private static final int MIN_WIDTH = 300;
-    private static final int MIN_HEIGHT = 200;
+    public static final int MIN_WIDTH = 300;
+    public static final int MIN_HEIGHT = 200;
+    public static final double WIDTH_HEIGHT_RATIO = 1.5;
 
     private final int width;
     private final int height;
@@ -31,7 +32,7 @@ public class ImageWidthHeight {
     }
 
     private void validWidthHeightRatio(int width, int height) {
-        if (2 * width != 3 * height) {
+        if ((double) width / height != WIDTH_HEIGHT_RATIO) {
             throw new IllegalArgumentException("width 와 height의 비율이 3:2 이어야 합니다");
         }
     }

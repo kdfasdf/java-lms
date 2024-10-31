@@ -26,4 +26,26 @@ public class Payment {
         this.amount = amount;
         this.createdAt = LocalDateTime.now();
     }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Payment)) {
+            return false;
+        }
+
+        Payment payment = (Payment) o;
+        return sessionId.equals(payment.sessionId) && nsUserId.equals(payment.nsUserId) && amount.equals(
+                payment.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = sessionId.hashCode();
+        result = 31 * result + nsUserId.hashCode();
+        result = 31 * result + amount.hashCode();
+        return result;
+    }
 }
