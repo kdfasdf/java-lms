@@ -51,7 +51,6 @@ public enum SessionType {
     }
 
     class Constants {
-
         public static final int FREE = 0;
         public static final int NO_STUDENT = 0;
     }

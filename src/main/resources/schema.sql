@@ -48,3 +48,33 @@ create table delete_history (
     deleted_by_id bigint,
     primary key (id)
 );
+
+create table session (
+    id bigint auto_increment primary key
+);
+
+create table session_duration (
+    id bigint auto_increment primary key,
+    session_id bigint not null,
+    start_date timestamp not null,
+    end_date timestamp not null
+);
+
+create table image (
+    id bigint auto_increment primary key,
+    image_type varchar(20) not null,
+    session_id bigint not null
+);
+
+create table image_size(
+    id bigint auto_increment primary key,
+    session_id bigint not null,
+    image_size int not null
+);
+
+create table image_width_height(
+    id bigint auto_increment primary key,
+    session_id bigint not null,
+    image_width int not null,
+    image_height int not null
+);

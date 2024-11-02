@@ -10,7 +10,7 @@ public class SessionDurationTest {
     @DisplayName("시작일이 종료일 보다 늦을 시 예외를 발생시키는지 확인한다")
     void 시작날짜_종료날짜보다_늦으면_예외_발생() {
         Assertions.assertThatThrownBy(
-                () -> new SessionDuration(
+                () -> new SessionDuration(0L, 0L,
                         LocalDateTime.of(2024, 11, 1, 0, 0),
                         LocalDateTime.of(2024, 10, 28, 0, 0)
                 )).isInstanceOf(IllegalArgumentException.class)

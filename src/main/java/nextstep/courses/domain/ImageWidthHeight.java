@@ -1,5 +1,6 @@
 package nextstep.courses.domain;
 
+import java.util.Objects;
 import nextstep.courses.exception.ImageHeightPixelException;
 import nextstep.courses.exception.ImageWidthPixelException;
 
@@ -9,13 +10,17 @@ public class ImageWidthHeight {
     private static final int MIN_WIDTH = WIDTH_RATIO * 100;
     private static final int MIN_HEIGHT = HEIGHT_RATIO * 100;
 
+    private final Long id;
+    private final Long sessionId;
     private final int width;
     private final int height;
 
-    public ImageWidthHeight(int width, int height) {
+    public ImageWidthHeight(Long id, Long sessionId, int width, int height) {
         validWidthPixel(width);
         validHeightPixel(height);
         validWidthHeightRatio(width, height);
+        this.id = id;
+        this.sessionId = sessionId;
         this.width = width;
         this.height = height;
     }
@@ -38,4 +43,39 @@ public class ImageWidthHeight {
         }
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getSessionId() {
+        return sessionId;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ImageWidthHeight)) {
+            return false;
+        }
+
+        ImageWidthHeight that = (ImageWidthHeight) o;
+        return Objects.equals(id, that.id) && Objects.equals(sessionId, that.sessionId);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(id);
+        result = 31 * result + Objects.hashCode(sessionId);
+        return result;
+    }
 }

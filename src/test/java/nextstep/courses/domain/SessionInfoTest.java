@@ -9,9 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SessionInfoTest {
-    Image image = new Image(ImageSizeTest.standardImageSize, ImageType.JPG,
+    Image image = new Image(0L, 0L, ImageSizeTest.standardImageSize, ImageType.JPG,
             ImageWidthHeightTest.standardImageWidthHeight);
-    SessionDuration sessionDuration = new SessionDuration(
+    SessionDuration sessionDuration = new SessionDuration(0L, 0L,
             LocalDateTime.of(2024, 10, 28, 0, 0),
             LocalDateTime.of(2024, 11, 1, 0, 0)
     );
