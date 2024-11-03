@@ -26,7 +26,7 @@ public class JdbcSessionDurationRepositoryTest {
     }
 
     @Test
-    @DisplayName("session_duration 테스트")
+    @DisplayName("session_duration 저장 테스트")
     void saveTest() {
         Assertions.assertThat(sessionDurationRepository.save(sessionDuration)).isEqualTo(1);
     }

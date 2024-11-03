@@ -77,7 +77,7 @@ create table session_info (
     session_id bigint not null,
     session_type varchar(20) not null,
     price bigint not null,
-    max_students bigint not null
+    max_students int not null
 );
 
 create table session_duration (
