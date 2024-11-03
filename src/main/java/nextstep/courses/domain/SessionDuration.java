@@ -1,6 +1,7 @@
 package nextstep.courses.domain;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class SessionDuration {
 
@@ -23,5 +24,33 @@ public class SessionDuration {
         }
     }
 
+    public Long getSessionId() {
+        return sessionId;
+    }
 
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof SessionDuration)) {
+            return false;
+        }
+
+        SessionDuration that = (SessionDuration) o;
+        return Objects.equals(sessionId, that.sessionId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(sessionId);
+    }
 }

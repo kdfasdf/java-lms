@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @JdbcTest
-public class JDBCImageSizeRepositoryTest {
+public class JdbcImageSizeRepositoryTest {
     private final ImageSize imageSize = new ImageSize(0L,0L, 100);
 
     @Autowired

@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @JdbcTest
-public class JDBCImageRepositoryTest {
+public class JdbcImageRepositoryTest {
     private static final Image image = new Image(1L , 0L,
             new ImageSize(0L,0L, 100), ImageType.JPEG, new ImageWidthHeight(0L,0L,600, 400));
 

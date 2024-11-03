@@ -15,7 +15,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @JdbcTest
-public class JDBCSessionRegisterInfoRepositoryTest {
+public class JdbcSessionRegisterInfoRepositoryTest {
     private final SessionRegisterInfo sessionRegisterInfo = new SessionRegisterInfo(
             0L, SessionStatus.REGISTER, Students.from(), Payments.from()
     );
