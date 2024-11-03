@@ -49,17 +49,6 @@ create table delete_history (
     primary key (id)
 );
 
-create table session (
-    id bigint auto_increment primary key
-);
-
-create table session_duration (
-    id bigint auto_increment primary key,
-    session_id bigint not null,
-    start_date timestamp not null,
-    end_date timestamp not null
-);
-
 create table image (
     id bigint auto_increment primary key,
     image_type varchar(20) not null,
@@ -77,4 +66,38 @@ create table image_width_height(
     session_id bigint not null,
     image_width int not null,
     image_height int not null
+);
+
+create table session_register_info (
+   session_id bigint not null,
+   session_status varchar(20) not null
+);
+
+create table session_info (
+    session_id bigint not null,
+    session_type varchar(20) not null,
+    price bigint not null,
+    max_students bigint not null
+);
+
+create table session_duration (
+    session_id bigint not null,
+    start_date timestamp,
+    end_date timestamp
+);
+
+create table session (
+    session_id bigint not null
+);
+
+create table students(
+    session_id bigint not null,
+    user_id varchar(20) not null
+);
+
+create table payments (
+    user_id varchar(20) not null,
+    session_id bigint not null,
+    amount bigint not null,
+    create_at timestamp
 );

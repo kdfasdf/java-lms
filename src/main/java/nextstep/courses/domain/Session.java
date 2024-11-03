@@ -24,8 +24,8 @@ public class Session {
         this.sessionId = sessionId;
         this.image = image;
         sessionType.validate(price, maxStudents);
-        this.sessionInfo = new SessionInfo(sessionType, price, maxStudents);
-        this.sessionRegisterInfo = new SessionRegisterInfo(sessionStatus, Students.from(), Payments.from());
+        this.sessionInfo = new SessionInfo(sessionId, sessionType, price, maxStudents);
+        this.sessionRegisterInfo = new SessionRegisterInfo(sessionId,sessionStatus, Students.from(), Payments.from());
         this.sessionDuration = sessionDuration;
     }
 

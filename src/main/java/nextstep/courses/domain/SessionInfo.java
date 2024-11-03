@@ -4,11 +4,13 @@ public class SessionInfo {
     private final SessionType sessionType;
     private final Long price;
     private final Integer maxStudents;
+    private final Long sessionId;
 
-    public SessionInfo(SessionType sessionType, Long price, Integer maxStudents) {
+    public SessionInfo(Long sessionId,SessionType sessionType, Long price, Integer maxStudents) {
         this.sessionType = sessionType;
         this.price = price;
         this.maxStudents = maxStudents;
+        this.sessionId = sessionId;
     }
 
     public void checkPaymentEqualsPrice(long payment) {

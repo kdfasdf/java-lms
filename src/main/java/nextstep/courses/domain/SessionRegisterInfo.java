@@ -1,14 +1,17 @@
 package nextstep.courses.domain;
 
+import java.util.Objects;
 import nextstep.payments.domain.Payment;
 import nextstep.users.domain.NsUser;
 
 public class SessionRegisterInfo {
     private final SessionStatus sessionStatus;
+    private final Long sessionId;
     private final Students students;
     private final Payments payments;
 
-    public SessionRegisterInfo(SessionStatus sessionStatus, Students students, Payments payments) {
+    public SessionRegisterInfo(Long sessionId,SessionStatus sessionStatus, Students students, Payments payments) {
+        this.sessionId = sessionId;
         this.sessionStatus = sessionStatus;
         this.students = students;
         this.payments = payments;
@@ -22,7 +25,7 @@ public class SessionRegisterInfo {
 
     public void addStudent(NsUser nsUser) {
         checkUserAlreadyRegisterSession(nsUser);
-        students.addStudent(nsUser);
+        students.addStudent(nsUser.getUserId());
     }
 
     private void checkUserAlreadyRegisterSession(NsUser nsUser) {
@@ -51,4 +54,33 @@ public class SessionRegisterInfo {
         return payments.getNumberOfPayments();
     }
 
+    public SessionStatus getSessionStatus() {
+        return sessionStatus;
+    }
+
+    public Long getSessionId() {
+        return sessionId;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof SessionRegisterInfo)) {
+            return false;
+        }
+
+        SessionRegisterInfo that = (SessionRegisterInfo) o;
+        return sessionStatus == that.sessionStatus && Objects.equals(sessionId, that.sessionId)
+                && Objects.equals(payments, that.payments);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(sessionStatus);
+        result = 31 * result + Objects.hashCode(sessionId);
+        result = 31 * result + Objects.hashCode(payments);
+        return result;
+    }
 }

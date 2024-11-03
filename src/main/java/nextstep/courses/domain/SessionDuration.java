@@ -4,17 +4,14 @@ import java.time.LocalDateTime;
 
 public class SessionDuration {
 
-    private final Long id;
-
     private final Long sessionId;
 
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
 
-    public SessionDuration(Long id, Long sessionId, LocalDateTime startDate, LocalDateTime endDate) {
+    public SessionDuration(Long sessionId, LocalDateTime startDate, LocalDateTime endDate) {
         checkStartDateAfterEndDate(startDate, endDate);
-        this.id = id;
         this.sessionId = sessionId;
         this.startDate = startDate;
         this.endDate = endDate;
