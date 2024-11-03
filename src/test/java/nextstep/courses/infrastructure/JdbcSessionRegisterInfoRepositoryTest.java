@@ -31,13 +31,13 @@ public class JdbcSessionRegisterInfoRepositoryTest {
     }
 
     @Test
-    @DisplayName("수강정보 테이블 생성 테스트")
+    @DisplayName("수강 등록정보 테이블 생성 테스트")
     void saveTest() {
         Assertions.assertThat(sessionRegisterInfoRepository.save(sessionRegisterInfo)).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("수강정보 테이블 id로 조회하는 테스트")
+    @DisplayName("수강 등록정보 테이블 id로 조회하는 테스트")
     void findByIdTest() {
         sessionRegisterInfoRepository.save(sessionRegisterInfo);
         Assertions.assertThat(sessionRegisterInfoRepository.findById(sessionRegisterInfo.getSessionId())).isEqualTo(sessionRegisterInfo);

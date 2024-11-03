@@ -31,7 +31,6 @@ public class JdbcImageRepository implements ImageRepository {
 
     @Override
     public Image findById(Long id) {
-       // String sql = "select id,image_type, session_id from image where id = ?";
         String sql = "SELECT\n"
                 + "        i.id AS image_id,\n"
                 + "                i.image_type,\n"
