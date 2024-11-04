@@ -26,10 +26,10 @@ public class JdbcSessionInfoRepository implements SessionInfoRepository {
     public SessionInfo findById(Long id) {
         String sql = "select * from session_info where session_id = ?";
         RowMapper<SessionInfo> rowMapper = ((rs, rowNum)
-                -> new SessionInfo(rs.getLong(1)
-                , SessionType.valueOf(rs.getString(2))
-                , rs.getLong(3)
-        ,rs.getInt(4)));
+                -> new SessionInfo(rs.getLong("session_id")
+                , SessionType.valueOf(rs.getString("session_type"))
+                , rs.getLong("price")
+        ,rs.getInt("max_students")));
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 }
