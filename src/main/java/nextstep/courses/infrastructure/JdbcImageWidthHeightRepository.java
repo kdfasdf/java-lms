@@ -16,17 +16,18 @@ public class JdbcImageWidthHeightRepository implements ImageWidthHeightRepositor
 
     @Override
     public int save(ImageWidthHeight imageWidthHeight) {
-        String sql = "insert into image_width_height (id,  image_width, image_height) values (?, ?, ?)";
-        return jdbcTemplate.update(sql, imageWidthHeight.getId(), imageWidthHeight.getWidth(), imageWidthHeight.getHeight());
+        String sql = "insert into image_width_height (id, addimage_width, image_height) values (?, ?, ?)";
+        return jdbcTemplate.update(sql, imageWidthHeight.getId(), imageWidthHeight.getWidth(),
+                imageWidthHeight.getHeight());
     }
 
     @Override
     public ImageWidthHeight findById(Long id) {
         String sql = "select * from image_width_height where id = ?";
         RowMapper<ImageWidthHeight> rowMapper = ((rs, rowNum) ->
-                new ImageWidthHeight(rs.getLong(1),
-                        rs.getInt(2),
-                        rs.getInt(3)));
+                new ImageWidthHeight(rs.getLong("id"),
+                        rs.getInt("image_width"),
+                        rs.getInt("image_height")));
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 }
