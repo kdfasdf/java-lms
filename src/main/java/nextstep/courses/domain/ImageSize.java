@@ -7,14 +7,12 @@ public class ImageSize {
     private static final int IMAGE_SIZE_MAX = 1024 * 1024;
     private static final int IMAGE_SIZE_MIN = 1;
 
-    private final Long sessionId;
     private final Long imageId;
     private final int imageSize;
 
-    public ImageSize(Long sessionId, Long imageId, int imageSize) {
+    public ImageSize(Long imageId, int imageSize) {
         validImageSize(imageSize);
         validSizeIsNegative(imageSize);
-        this.sessionId = sessionId;
         this.imageId = imageId;
         this.imageSize = imageSize;
     }
@@ -39,10 +37,6 @@ public class ImageSize {
         return imageSize;
     }
 
-    public Long getSessionId() {
-        return sessionId;
-    }
-
     @Override
     public final boolean equals(Object o) {
         if (this == o) {
@@ -53,14 +47,11 @@ public class ImageSize {
         }
 
         ImageSize imageSize = (ImageSize) o;
-        return Objects.equals(sessionId, imageSize.sessionId) && Objects.equals(imageId,
-                imageSize.imageId);
+        return Objects.equals(imageId, imageSize.imageId);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(sessionId);
-        result = 31 * result + Objects.hashCode(imageId);
-        return result;
+        return Objects.hashCode(imageId);
     }
 }

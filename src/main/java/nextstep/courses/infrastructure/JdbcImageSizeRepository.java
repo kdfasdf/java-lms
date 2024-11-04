@@ -16,8 +16,8 @@ public class JdbcImageSizeRepository implements ImageSizeRepository {
 
     @Override
     public int save(ImageSize imageSize) {
-        String sql = "insert into image_size (session_id,id, image_size) values (?, ?, ?)";
-        return jdbcTemplate.update(sql, imageSize.getSessionId(), imageSize.getImageId(), imageSize.getImageSize());
+        String sql = "insert into image_size (id, image_size) values (?, ?)";
+        return jdbcTemplate.update(sql, imageSize.getImageId(), imageSize.getImageSize());
     }
 
     @Override
@@ -25,8 +25,7 @@ public class JdbcImageSizeRepository implements ImageSizeRepository {
         String sql = "select * from image_size where id = ?";
         RowMapper<ImageSize>  rowMapper = ((rs, rowNum) ->
                 new ImageSize(rs.getLong(1),
-                        rs.getLong(2),
-                        rs.getInt(3)));
+                        rs.getInt(2)));
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 

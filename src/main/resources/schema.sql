@@ -57,13 +57,11 @@ create table image (
 
 create table image_size(
     id bigint auto_increment primary key,
-    session_id bigint not null,
     image_size int not null
 );
 
 create table image_width_height(
     id bigint auto_increment primary key,
-    session_id bigint not null,
     image_width int not null,
     image_height int not null
 );

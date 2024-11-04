@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @JdbcTest
 public class JdbcImageWidthHeightRepositoryTest {
-    private final ImageWidthHeight imageWidthHeight = new ImageWidthHeight(0L,0L,600,400);
+    private final ImageWidthHeight imageWidthHeight = new ImageWidthHeight(0L,600,400);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -35,7 +35,7 @@ public class JdbcImageWidthHeightRepositoryTest {
     @DisplayName("이미지 id로 이미지 너비높이 테이블 조회 테스트")
     void findByIdTest() {
         imageWidthHeightRepository.save(imageWidthHeight);
-        Assertions.assertThat(imageWidthHeightRepository.findById(imageWidthHeight.getSessionId())).isEqualTo(imageWidthHeight);
+        Assertions.assertThat(imageWidthHeightRepository.findById(imageWidthHeight.getId())).isEqualTo(imageWidthHeight);
     }
 
 }

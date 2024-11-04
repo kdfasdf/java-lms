@@ -11,16 +11,14 @@ public class ImageWidthHeight {
     private static final int MIN_HEIGHT = HEIGHT_RATIO * 100;
 
     private final Long id;
-    private final Long sessionId;
     private final int width;
     private final int height;
 
-    public ImageWidthHeight(Long id, Long sessionId, int width, int height) {
+    public ImageWidthHeight(Long id,  int width, int height) {
         validWidthPixel(width);
         validHeightPixel(height);
         validWidthHeightRatio(width, height);
         this.id = id;
-        this.sessionId = sessionId;
         this.width = width;
         this.height = height;
     }
@@ -55,10 +53,6 @@ public class ImageWidthHeight {
         return id;
     }
 
-    public Long getSessionId() {
-        return sessionId;
-    }
-
     @Override
     public final boolean equals(Object o) {
         if (this == o) {
@@ -69,13 +63,11 @@ public class ImageWidthHeight {
         }
 
         ImageWidthHeight that = (ImageWidthHeight) o;
-        return Objects.equals(id, that.id) && Objects.equals(sessionId, that.sessionId);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + Objects.hashCode(sessionId);
-        return result;
+        return Objects.hashCode(id);
     }
 }

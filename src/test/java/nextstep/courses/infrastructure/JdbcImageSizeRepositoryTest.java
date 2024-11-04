@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @JdbcTest
 public class JdbcImageSizeRepositoryTest {
-    private final ImageSize imageSize = new ImageSize(0L,0L, 100);
+    private final ImageSize imageSize = new ImageSize(0L, 100);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

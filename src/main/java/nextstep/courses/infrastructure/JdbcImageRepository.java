@@ -23,37 +23,27 @@ public class JdbcImageRepository implements ImageRepository {
     @Override
     public int save(Image image) {
         String sql = "insert into image (id,image_type,session_id) values(?, ?, ?);"
-                + "insert into image_size (session_id,id, image_size) values (?, ?, ?);"
-                +"insert into image_width_height(id, session_id, image_width, image_height) values (?, ?, ?, ?);";
+                + "insert into image_size (id, image_size) values (?, ?);"
+                +"insert into image_width_height(id, image_width, image_height) values (?, ?, ?);";
         return jdbcTemplate.update(sql, image.getId(), image.getImageType().name(), image.getSessionId()
-        ,image.getSessionId(), image.getId(), image.getImageSize().getImageSize()
-        ,image.getId(), image.getSessionId(), image.getImageWidthHeight().getWidth(), image.getImageWidthHeight().getHeight());
+        , image.getId(), image.getImageSize().getImageSize()
+        ,image.getId(),  image.getImageWidthHeight().getWidth(), image.getImageWidthHeight().getHeight());
     }
 
     @Override
     public Optional<Image> findById(Long id) {
-        String sql = "SELECT\n"
-                + "        i.id AS image_id,\n"
-                + "                i.image_type,\n"
-                + "                i.session_id,\n"
-                + "                s.id AS size_id,\n"
-                + "        s.image_size,\n"
-                + "                wh.id AS width_height_id,\n"
-                + "        wh.image_width,\n"
-                + "                wh.image_height\n"
-                + "        FROM\n"
-                + "        image i\n"
-                + "        LEFT JOIN\n"
-                + "        image_size s ON i.id = s.id\n"
-                + "        LEFT JOIN\n"
-                + "        image_width_height wh ON i.id = wh.id"
-                + " WHERE i.id = ?";
+        String sql = "select i.id as image_id, i.image_type, i.session_id, "
+                + "s.id as size_id, s.image_size,"
+                + "wh.id as width_height_id, wh.image_width, wh.image_height "
+                + "from image i left join  image_size s on i.id = s.id"
+                + "  left join image_width_height wh on i.id = wh.id"
+                + " where i.id = ?";
         RowMapper<Image> rowMapper = (rs, rowNum) -> new Image(
-                rs.getLong(1),
-                rs.getLong(3),
-                new ImageSize(rs.getLong(3),rs.getLong(1),rs.getInt(4)),
-                ImageType.valueOf(rs.getString(2)),
-                new ImageWidthHeight(rs.getLong(1),rs.getLong(3),rs.getInt(7),rs.getInt(8)));
+                rs.getLong("image_id"),
+                rs.getLong("session_id"),
+                new ImageSize(rs.getLong("image_id"),rs.getInt("image_size")),
+                ImageType.valueOf(rs.getString("image_type")),
+                new ImageWidthHeight(rs.getLong("width_height_id"),rs.getInt("image_width"),rs.getInt("image_height")));
         return Optional.of(jdbcTemplate.queryForObject(sql, rowMapper, id));
     }
 

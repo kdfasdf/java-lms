@@ -25,7 +25,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @JdbcTest
 public class JdbcSessionRepositoryTest {
     private static final Image image = new Image(1L , 0L,
-            new ImageSize(0L,0L, 100), ImageType.JPEG, new ImageWidthHeight(0L,0L,600, 400));
+            new ImageSize(0L, 100), ImageType.JPEG, new ImageWidthHeight(0L,600, 400));
 
 
     private final SessionDuration sessionDuration = new SessionDuration(0L, LocalDateTime.now(),LocalDateTime.now().plusMinutes(1));
