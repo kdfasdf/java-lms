@@ -24,9 +24,9 @@ public class JdbcSessionDurationRepository implements SessionDurationRepository 
     public SessionDuration findById(Long id) {
         String sql = "select * from session_duration where session_id = ?";
         RowMapper<SessionDuration> rowMapper = ((rs, rowNum)
-        -> new SessionDuration(rs.getLong(1)
-        , rs.getTimestamp(2).toLocalDateTime()
-        , rs.getTimestamp(3).toLocalDateTime()));
+        -> new SessionDuration(rs.getLong("session_id")
+        , rs.getTimestamp("start_date").toLocalDateTime()
+        , rs.getTimestamp("end_date").toLocalDateTime()));
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 

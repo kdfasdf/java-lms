@@ -16,7 +16,7 @@ public class JdbcImageWidthHeightRepository implements ImageWidthHeightRepositor
 
     @Override
     public int save(ImageWidthHeight imageWidthHeight) {
-        String sql = "insert into image_width_height (id, addimage_width, image_height) values (?, ?, ?)";
+        String sql = "insert into image_width_height (id, image_width, image_height) values (?, ?, ?)";
         return jdbcTemplate.update(sql, imageWidthHeight.getId(), imageWidthHeight.getWidth(),
                 imageWidthHeight.getHeight());
     }
