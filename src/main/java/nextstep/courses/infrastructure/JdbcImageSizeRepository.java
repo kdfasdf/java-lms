@@ -24,8 +24,8 @@ public class JdbcImageSizeRepository implements ImageSizeRepository {
     public ImageSize findById(Long id) {
         String sql = "select * from image_size where id = ?";
         RowMapper<ImageSize>  rowMapper = ((rs, rowNum) ->
-                new ImageSize(rs.getLong(1),
-                        rs.getInt(2)));
+                new ImageSize(rs.getLong("id"),
+                        rs.getInt("image_size")));
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 

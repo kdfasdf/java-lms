@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-@Repository("imageSizeRepository")
+@Repository("imageWidthHeightRepository")
 public class JdbcImageWidthHeightRepository implements ImageWidthHeightRepository {
     private JdbcOperations jdbcTemplate;
 
@@ -16,7 +16,7 @@ public class JdbcImageWidthHeightRepository implements ImageWidthHeightRepositor
 
     @Override
     public int save(ImageWidthHeight imageWidthHeight) {
-        String sql = "insert into image_width_height (id, session_id, image_width, image_height) values (?, ?, ?, ?)";
+        String sql = "insert into image_width_height (id,  image_width, image_height) values (?, ?, ?)";
         return jdbcTemplate.update(sql, imageWidthHeight.getId(), imageWidthHeight.getWidth(), imageWidthHeight.getHeight());
     }
 
@@ -25,8 +25,8 @@ public class JdbcImageWidthHeightRepository implements ImageWidthHeightRepositor
         String sql = "select * from image_width_height where id = ?";
         RowMapper<ImageWidthHeight> rowMapper = ((rs, rowNum) ->
                 new ImageWidthHeight(rs.getLong(1),
-                        rs.getInt(3),
-                        rs.getInt(4)));
+                        rs.getInt(2),
+                        rs.getInt(3)));
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 }
