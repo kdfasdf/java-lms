@@ -7,10 +7,6 @@ public class ImageSize {
     private static final int IMAGE_SIZE_MAX = 1024 * 1024;
     private static final int IMAGE_SIZE_MIN = 1;
 
-    public Long getSessionId() {
-        return sessionId;
-    }
-
     private final Long sessionId;
     private final Long imageId;
     private final int imageSize;
@@ -41,6 +37,10 @@ public class ImageSize {
 
     public int getImageSize() {
         return imageSize;
+    }
+
+    public Long getSessionId() {
+        return sessionId;
     }
 
     @Override

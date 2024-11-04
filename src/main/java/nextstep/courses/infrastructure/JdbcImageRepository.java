@@ -2,6 +2,7 @@ package nextstep.courses.infrastructure;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import nextstep.courses.domain.Image;
 import nextstep.courses.domain.ImageRepository;
 import nextstep.courses.domain.ImageSize;
@@ -30,7 +31,7 @@ public class JdbcImageRepository implements ImageRepository {
     }
 
     @Override
-    public Image findById(Long id) {
+    public Optional<Image> findById(Long id) {
         String sql = "SELECT\n"
                 + "        i.id AS image_id,\n"
                 + "                i.image_type,\n"
@@ -53,7 +54,7 @@ public class JdbcImageRepository implements ImageRepository {
                 new ImageSize(rs.getLong(3),rs.getLong(1),rs.getInt(4)),
                 ImageType.valueOf(rs.getString(2)),
                 new ImageWidthHeight(rs.getLong(1),rs.getLong(3),rs.getInt(7),rs.getInt(8)));
-        return jdbcTemplate.queryForObject(sql, rowMapper, id);
+        return Optional.of(jdbcTemplate.queryForObject(sql, rowMapper, id));
     }
 
     private LocalDateTime toLocalDateTime(Timestamp timestamp) {
