@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-@Repository("SessionRepositoryInfoRepository")
+@Repository("sessionRepositoryInfoRepository")
 public class JdbcSessionRegisterInfoRepository implements SessionRegisterInfoRepository {
     private JdbcOperations jdbcTemplate;
 

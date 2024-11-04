@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-@Repository("ImageSizeRepository")
+@Repository("imageSizeRepository")
 public class JdbcImageWidthHeightRepository implements ImageWidthHeightRepository {
     private JdbcOperations jdbcTemplate;
 

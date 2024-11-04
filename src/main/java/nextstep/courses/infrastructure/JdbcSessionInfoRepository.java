@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-@Repository("SessionInfoRepository")
+@Repository("sessionInfoRepository")
 public class JdbcSessionInfoRepository implements SessionInfoRepository {
     private JdbcOperations jdbcTemplate;
 

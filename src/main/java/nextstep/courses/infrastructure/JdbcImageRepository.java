@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-@Repository("ImageRepository")
+@Repository("imageRepository")
 public class JdbcImageRepository implements ImageRepository {
     private JdbcOperations jdbcTemplate;
 

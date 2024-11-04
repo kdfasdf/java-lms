@@ -13,7 +13,9 @@ import nextstep.courses.domain.Students;
 import nextstep.payments.domain.Payment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
+@Repository("sessionRepository")
 public class JdbcSessionRepository implements SessionRepository {
     private JdbcTemplate jdbcTemplate;
     public JdbcSessionRepository(JdbcTemplate jdbcTemplate) {
