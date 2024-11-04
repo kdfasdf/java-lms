@@ -31,13 +31,15 @@ public class JdbcSessionRegisterInfoRepository implements SessionRegisterInfoRep
         String sql = "select * from session_register_info where session_id = ?;";
         String studentSql = "select user_id from students where session_id = ?;";
         String paymentSql = "select * from payments where session_id = ?;";
-        RowMapper<String> studentMapper = (rs, rowNum) -> rs.getString(1);
+        RowMapper<String> studentMapper = (rs, rowNum) -> rs.getString("user_id");
         RowMapper<Payment> paymentsMapper = (rs, rowNum) ->
-                new Payment(rs.getString(1), rs.getLong(2), rs.getLong(3), rs.getLong(4));
+                new Payment(rs.getString("user_id"), rs.getLong("session_id"),
+                        rs.getLong("amount"), rs.getLong("create_at"));
         List<String> students = jdbcTemplate.query(studentSql, studentMapper, Id);
         List<Payment> payments = jdbcTemplate.query(paymentSql, paymentsMapper, Id);
         RowMapper<SessionRegisterInfo> rowMapper =(rs, rowNum) -> new SessionRegisterInfo(
-                rs.getLong(1), SessionStatus.valueOf(rs.getString(2)), Students.from(students), Payments.from(payments));
+                rs.getLong("session_id"), SessionStatus.valueOf(rs.getString("session_status")),
+                Students.from(students), Payments.from(payments));
         return jdbcTemplate.queryForObject(sql, rowMapper, Id);
     }
 }
