@@ -40,6 +40,20 @@ public class JdbcImageRepository implements ImageRepository {
         return Optional.of(jdbcTemplate.queryForObject(sql, rowMapper, id));
     }
 
+    public Optional<ImageSize> findByIdImageSize(Long id) {
+        String sql = "select * from image where id = ?";
+        RowMapper<ImageSize> rowMapper = (rs, rowNum) ->
+                new ImageSize(rs.getLong("id"),rs.getInt("image_size"));
+        return Optional.of(jdbcTemplate.queryForObject(sql, rowMapper, id));
+    }
+
+    public Optional<ImageWidthHeight> findByIdImageWidthHeight(Long id) {
+        String sql = "select id,image_width,image_height from image where id = ?";
+        RowMapper<ImageWidthHeight> rowMapper = (rs, rowNum) ->
+                new ImageWidthHeight(rs.getLong("id"),rs.getInt("image_width"),rs.getInt("image_height"));
+        return Optional.of(jdbcTemplate.queryForObject(sql, rowMapper, id));
+    }
+
     private LocalDateTime toLocalDateTime(Timestamp timestamp) {
         if (timestamp == null) {
             return null;

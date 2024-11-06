@@ -15,8 +15,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @JdbcTest
 public class JdbcImageRepositoryTest {
+
+    private static final ImageSize imageSize = new ImageSize(1L, 100);
+    private static final ImageWidthHeight imageWidthHeight = new ImageWidthHeight(1L,600, 400);
     private static final Image image = new Image(1L , 0L,
-            new ImageSize(0L, 100), ImageType.JPEG, new ImageWidthHeight(0L,600, 400));
+            imageSize, ImageType.JPEG, imageWidthHeight);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -41,5 +44,20 @@ public class JdbcImageRepositoryTest {
         Assertions.assertThat(imageRepository.findById(image.getId()).get()).isEqualTo(image);
     }
 
+    @Test
+    @DisplayName("id로 이미지 사이즈조회 테스트")
+    void findByIdImageSizeTest() {
+        JdbcImageRepository jdbcImageRepository = new JdbcImageRepository(jdbcTemplate);
+        jdbcImageRepository.save(image);
+        Assertions.assertThat(jdbcImageRepository.findByIdImageSize(image.getId()).get()).isEqualTo(imageSize);
+    }
+
+    @Test
+    @DisplayName("id로 이미지 너비,높이 조회 테스트")
+    void findByIdImageWidthHeightTest() {
+        JdbcImageRepository jdbcImageRepository = new JdbcImageRepository(jdbcTemplate);
+        jdbcImageRepository.save(image);
+        Assertions.assertThat(jdbcImageRepository.findByIdImageWidthHeight(image.getId()).get()).isEqualTo(imageWidthHeight);
+    }
 
 }

@@ -61,5 +61,28 @@ public class JdbcSessionRepositoryTest {
         Assertions.assertThat(sessionRepository.findById(session.getSessionId())).isEqualTo(session);
     }
 
+    @Test
+    @DisplayName("id로 강의 기간 조회하는 테스트")
+    void findByIdSessionDurationTest() {
+        JdbcSessionRepository jdbcSessionRepository = new JdbcSessionRepository(jdbcTemplate);
+        jdbcSessionRepository.save(session);
+        Assertions.assertThat(jdbcSessionRepository.findByIdSessionDuration(session.getSessionId())).isEqualTo(sessionDuration);
+    }
+
+    @Test
+    @DisplayName("id로 강의 정보 조회하는 테스트")
+    void findByIdSessionInfoTest() {
+        JdbcSessionRepository jdbcSessionRepository = new JdbcSessionRepository(jdbcTemplate);
+        jdbcSessionRepository.save(session);
+        Assertions.assertThat(jdbcSessionRepository.findByIdSessionInfo(session.getSessionId())).isEqualTo(sessionInfo);
+    }
+
+    @Test
+    @DisplayName("id로 강의 수강 정보 조회하는 테스트")
+    void findByIdSessionRegisterInfoTest() {
+        JdbcSessionRepository jdbcSessionRepository = new JdbcSessionRepository(jdbcTemplate);
+        jdbcSessionRepository.save(session);
+        Assertions.assertThat(jdbcSessionRepository.findByIdSessionRegisterInfo(session.getSessionId())).isEqualTo(sessionRegisterInfo);
+    }
 
 }
