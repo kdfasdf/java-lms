@@ -31,6 +31,14 @@ public class Student {
         return false;
     }
 
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public SelectStatus getSelectedStatus() {
+        return selectedStatus;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) {

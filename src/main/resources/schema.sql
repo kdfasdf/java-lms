@@ -71,7 +71,8 @@ create table session (
 
 create table students(
     session_id bigint not null,
-    user_id varchar(20) not null
+    user_id varchar(20) not null,
+    selected_status varchar(20) not null default 'unselected'
 );
 
 create table payments (
