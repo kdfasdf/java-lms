@@ -27,14 +27,11 @@ public class JdbcSessionRepository implements SessionRepository {
         SessionRegisterInfo sessionRegisterInfo = session.getSessionRegisterInfo();
         SessionInfo sessionInfo = session.getSessionInfo();
         SessionDuration sessionDuration = session.getSessionDuration();
-        String sql = "insert into session (session_id) values (?);"
-                +"insert into session_register_info (session_id,session_status) values (?,?);"
-                +"insert into session_info (session_id, session_type, price, max_students) values (?,?,?,?);"
-                +"insert into session_duration (session_id, start_date, end_date) values (?,?,?)";
+        String sql = "insert into session (session_id,session_status,session_type, price, max_students, start_date, end_date) "
+                + "values (?,?,?,?,?,?,?);";
         return jdbcTemplate.update(sql, session.getSessionId()
-        ,session.getSessionId(),sessionRegisterInfo.getSessionStatus().name()
-        ,session.getSessionId(),sessionInfo.getSessionType().name(),sessionInfo.getPrice(),sessionInfo.getMaxStudents()
-        ,session.getSessionId(),sessionDuration.getStartDate(),sessionDuration.getEndDate());
+        ,sessionRegisterInfo.getSessionStatus().name(),sessionInfo.getSessionType().name(),sessionInfo.getPrice(),sessionInfo.getMaxStudents()
+        ,sessionDuration.getStartDate(),sessionDuration.getEndDate());
     }
 
     @Override
@@ -52,7 +49,7 @@ public class JdbcSessionRepository implements SessionRepository {
     }
 
     public SessionInfo findByIdSessionInfo(Long id) {
-        String sql = "select * from session_info where session_id = ?";
+        String sql = "select session_id, session_type, price, max_students from session where session_id = ?";
         RowMapper<SessionInfo> rowMapper = ((rs, rowNum)
                 -> new SessionInfo(rs.getLong("session_id")
                 , SessionType.valueOf(rs.getString("session_type"))
@@ -62,7 +59,7 @@ public class JdbcSessionRepository implements SessionRepository {
     }
 
     public SessionRegisterInfo findByIdSessionRegisterInfo(Long Id){
-        String sql = "select * from session_register_info where session_id = ?;";
+        String sql = "select session_id, session_status from session where session_id = ?;";
         String studentSql = "select user_id from students where session_id = ?;";
         String paymentSql = "select * from payments where session_id = ?;";
         RowMapper<String> studentMapper = (rs, rowNum) -> rs.getString("user_id");
@@ -78,7 +75,7 @@ public class JdbcSessionRepository implements SessionRepository {
     }
 
     public SessionDuration findByIdSessionDuration(Long id) {
-        String sql = "select * from session_duration where session_id = ?";
+        String sql = "select session_id, start_date, end_date from session where session_id = ?";
         RowMapper<SessionDuration> rowMapper = ((rs, rowNum)
                 -> new SessionDuration(rs.getLong("session_id")
                 , rs.getTimestamp("start_date").toLocalDateTime()

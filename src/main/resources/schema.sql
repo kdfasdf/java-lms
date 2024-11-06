@@ -58,26 +58,14 @@ create table image (
     session_id bigint not null
 );
 
-create table session_register_info (
-   session_id bigint not null,
-   session_status varchar(20) not null
-);
-
-create table session_info (
+create table session (
     session_id bigint not null,
     session_type varchar(20) not null,
     price bigint not null,
-    max_students int not null
-);
-
-create table session_duration (
-    session_id bigint not null,
+    max_students int not null,
     start_date timestamp,
-    end_date timestamp
-);
-
-create table session (
-    session_id bigint not null
+    end_date timestamp,
+    session_status varchar(20) not null
 );
 
 create table students(
