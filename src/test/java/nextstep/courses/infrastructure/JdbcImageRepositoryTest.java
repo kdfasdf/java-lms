@@ -44,7 +44,7 @@ public class JdbcImageRepositoryTest {
     @DisplayName("id로 이미지 조회 테스트")
     void findByIdTest() {
         imageRepository.save(image);
-        Assertions.assertThat(imageRepository.findById(image.getId()).get()).isEqualTo(image);
+        Assertions.assertThat(imageRepository.findById(image.getSessionId()).get().get(0)).isEqualTo(image);
     }
 
     @Test

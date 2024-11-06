@@ -2,6 +2,7 @@ package nextstep.courses.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Students {
     private final List<Student> students;
@@ -17,6 +18,13 @@ public class Students {
 
     private Students(List<Student> students) {
         this.students = new ArrayList<>(students);
+    }
+
+    public Students cancelRegisterWhoUnselected() {
+        return new Students(
+                students.stream()
+                    .filter(Student::isSelected)
+                    .collect(Collectors.toList()));
     }
 
     @Deprecated

@@ -19,8 +19,16 @@ public class Student {
         this.selectedStatus = selectedStatus;
     }
 
+
     private Student(String studentId) {
         this.studentId = studentId;
+    }
+
+    public boolean isSelected() {
+        if(selectedStatus == SelectStatus.SELECTED) {
+            return true;
+        }
+        return false;
     }
 
     @Override

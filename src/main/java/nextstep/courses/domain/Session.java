@@ -38,10 +38,6 @@ public class Session {
         this(sessionId, image, sessionType, sessionStatus, 0L, Integer.MAX_VALUE, sessionDuration, sessionRegisteringStatus);
     }
 
-    public long getPrice() {
-        return sessionInfo.getPrice();
-    }
-
     public void register(NsUser nsUser, long payment,SelectStatus selectStatus) {
         registerStudent(nsUser, payment,selectStatus);
         addPaymentHistory(nsUser.getId(), payment, sessionId);
@@ -59,8 +55,16 @@ public class Session {
         sessionRegisterInfo.addPaymentHistory(userId, payment, sessionId);
     }
 
+    public void removeUnselectedStudents() {
+        sessionRegisterInfo.removeUnselectedStudents();
+    }
+
     public int getNumberOfStudents() {
         return sessionRegisterInfo.getNumberOfStudents();
+    }
+
+    public long getPrice() {
+        return sessionInfo.getPrice();
     }
 
     public int getNumberOfPayments() {

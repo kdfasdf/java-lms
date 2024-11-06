@@ -21,7 +21,6 @@ public class SessionInfoTest {
     void 유료_강의_생성() {
         Assertions.assertThatCode(() ->
                 Session.createPaidSession(0L, image, SessionType.PAID, SessionStatus.READY, 1L, 1, sessionDuration, SessionRegisteringStatus.OPEN));
-
     }
 
     @Test

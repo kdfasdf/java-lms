@@ -8,7 +8,7 @@ public class SessionRegisterInfo {
     private final SessionStatus sessionStatus;
     private final SessionRegisteringStatus sessionRegisteringStatus;
     private final Long sessionId;
-    private final Students students;
+    private Students students;
     private final Payments payments;
 
     public SessionRegisterInfo(Long sessionId,SessionStatus sessionStatus, Students students, Payments payments, SessionRegisteringStatus sessionRegisteringStatus) {
@@ -23,6 +23,10 @@ public class SessionRegisterInfo {
         if(sessionRegisteringStatus != SessionRegisteringStatus.OPEN) {
             throw new IllegalArgumentException("이 강의는 모집중인 상태가 아닙니다");
         }
+    }
+
+    public void removeUnselectedStudents() {
+        this.students = students.cancelRegisterWhoUnselected();
     }
 
     @Deprecated
