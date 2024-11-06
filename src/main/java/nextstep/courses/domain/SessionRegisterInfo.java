@@ -6,30 +6,48 @@ import nextstep.users.domain.NsUser;
 
 public class SessionRegisterInfo {
     private final SessionStatus sessionStatus;
+    private final SessionRegisteringStatus sessionRegisteringStatus;
     private final Long sessionId;
     private final Students students;
     private final Payments payments;
 
-    public SessionRegisterInfo(Long sessionId,SessionStatus sessionStatus, Students students, Payments payments) {
+    public SessionRegisterInfo(Long sessionId,SessionStatus sessionStatus, Students students, Payments payments, SessionRegisteringStatus sessionRegisteringStatus) {
         this.sessionId = sessionId;
         this.sessionStatus = sessionStatus;
         this.students = students;
         this.payments = payments;
+        this.sessionRegisteringStatus = sessionRegisteringStatus;
     }
 
+    public void checkSessionIsOpen() {
+        if(sessionRegisteringStatus != SessionRegisteringStatus.OPEN) {
+            throw new IllegalArgumentException("이 강의는 모집중인 상태가 아닙니다");
+        }
+    }
+
+    @Deprecated
     public void checkSessionIsRegistering() {
         if (sessionStatus != SessionStatus.REGISTER) {
             throw new IllegalArgumentException("이 강의는 지금 모집중인 상태가 아닙니다");
         }
     }
-
+    @Deprecated
     public void addStudent(NsUser nsUser) {
         checkUserAlreadyRegisterSession(nsUser);
         students.addStudent(nsUser.getUserId());
     }
 
+    public void addStudentBySelectedStatus(NsUser nsUser, SelectStatus selectStatus) {
+        checkUserAlreadyRegisterSession(nsUser);
+        if(selectStatus == SelectStatus.SELECTED ) {
+            students.addSelectedStudent(nsUser.getUserId());
+            return;
+        }
+        students.addUnSelectedStudent(nsUser.getUserId());
+    }
+
     private void checkUserAlreadyRegisterSession(NsUser nsUser) {
-        if (students.getContainResult(nsUser)) {
+        if (students.getContainResult(nsUser.getUserId())) {
             throw new IllegalArgumentException("이미 수업에 등록한 학생입니다");
         }
     }
@@ -60,6 +78,10 @@ public class SessionRegisterInfo {
 
     public Long getSessionId() {
         return sessionId;
+    }
+
+    public SessionRegisteringStatus getSessionRegisteringStatus() {
+        return sessionRegisteringStatus;
     }
 
     @Override

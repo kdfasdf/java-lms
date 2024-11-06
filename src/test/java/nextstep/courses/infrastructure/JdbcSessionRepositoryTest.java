@@ -10,6 +10,7 @@ import nextstep.courses.domain.Session;
 import nextstep.courses.domain.SessionDuration;
 import nextstep.courses.domain.SessionInfo;
 import nextstep.courses.domain.SessionRegisterInfo;
+import nextstep.courses.domain.SessionRegisteringStatus;
 import nextstep.courses.domain.SessionRepository;
 import nextstep.courses.domain.SessionStatus;
 import nextstep.courses.domain.SessionType;
@@ -33,10 +34,10 @@ public class JdbcSessionRepositoryTest {
     private final SessionInfo sessionInfo = new SessionInfo(0L, SessionType.PAID, 1000L, 100);
 
     private final SessionRegisterInfo sessionRegisterInfo = new SessionRegisterInfo(
-            0L, SessionStatus.REGISTER, Students.from(), Payments.from()
+            0L, SessionStatus.REGISTER, Students.from(), Payments.from(), SessionRegisteringStatus.OPEN
     );
 
-    private final Session session = Session.createPaidSession(0L, image, SessionType.PAID, SessionStatus.REGISTER, 1000L, 100,sessionDuration);
+    private final Session session = Session.createPaidSession(0L, image, SessionType.PAID, SessionStatus.REGISTER, 1000L, 100,sessionDuration, SessionRegisteringStatus.OPEN);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

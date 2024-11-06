@@ -65,7 +65,8 @@ create table session (
     max_students int not null,
     start_date timestamp,
     end_date timestamp,
-    session_status varchar(20) not null
+    session_status varchar(20) not null,
+    session_register_status varchar(20) not null
 );
 
 create table students(
