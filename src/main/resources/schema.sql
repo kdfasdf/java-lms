@@ -52,18 +52,10 @@ create table delete_history (
 create table image (
     id bigint auto_increment primary key,
     image_type varchar(20) not null,
-    session_id bigint not null
-);
-
-create table image_size(
-    id bigint auto_increment primary key,
-    image_size int not null
-);
-
-create table image_width_height(
-    id bigint auto_increment primary key,
+    image_size int not null,
     image_width int not null,
-    image_height int not null
+    image_height int not null,
+    session_id bigint not null
 );
 
 create table session_register_info (
