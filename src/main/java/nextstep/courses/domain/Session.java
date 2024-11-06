@@ -1,11 +1,13 @@
 package nextstep.courses.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import nextstep.users.domain.NsUser;
 
 public class Session {
     private final Long sessionId;
-    private final Image image;
+    private final List<Image> image = new ArrayList<>();
     private final SessionDuration sessionDuration;
     private final SessionInfo sessionInfo;
     private final SessionRegisterInfo sessionRegisterInfo;
@@ -24,7 +26,7 @@ public class Session {
     private Session(Long sessionId, Image image, SessionType sessionType, SessionStatus sessionStatus, Long price,
                     Integer maxStudents, SessionDuration sessionDuration, SessionRegisteringStatus sessionRegisteringStatus) {
         this.sessionId = sessionId;
-        this.image = image;
+        this.image.add(image);
         sessionType.validate(price, maxStudents);
         this.sessionInfo = new SessionInfo(sessionId, sessionType, price, maxStudents);
         this.sessionRegisterInfo = new SessionRegisterInfo(sessionId,sessionStatus, Students.from(), Payments.from(), sessionRegisteringStatus);
@@ -69,7 +71,7 @@ public class Session {
         return sessionId;
     }
 
-    public Image getImage() {
+    public List<Image> getImage() {
         return image;
     }
 

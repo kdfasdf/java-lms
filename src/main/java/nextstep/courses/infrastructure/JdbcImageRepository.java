@@ -2,6 +2,7 @@ package nextstep.courses.infrastructure;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import nextstep.courses.domain.Image;
 import nextstep.courses.domain.ImageRepository;
@@ -29,15 +30,16 @@ public class JdbcImageRepository implements ImageRepository {
     }
 
     @Override
-    public Optional<Image> findById(Long id) {
-        String sql = "select * from image where id = ?";
+    public Optional<List<Image>> findById(Long id) {
+        String sql = "select * from image where session_id = ?";
         RowMapper<Image> rowMapper = (rs, rowNum) -> new Image(
                 rs.getLong("id"),
                 rs.getLong("session_id"),
                 new ImageSize(rs.getLong("id"),rs.getInt("image_size")),
                 ImageType.valueOf(rs.getString("image_type")),
                 new ImageWidthHeight(rs.getLong("id"),rs.getInt("image_width"),rs.getInt("image_height")));
-        return Optional.of(jdbcTemplate.queryForObject(sql, rowMapper, id));
+        List<Image> images = jdbcTemplate.query(sql, rowMapper, id);
+        return Optional.of(images);
     }
 
     public Optional<ImageSize> findByIdImageSize(Long id) {

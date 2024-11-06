@@ -21,6 +21,9 @@ public class JdbcImageRepositoryTest {
     private static final Image image = new Image(1L , 0L,
             imageSize, ImageType.JPEG, imageWidthHeight);
 
+    private static final Image image2 = new Image(2L , 0L,
+            imageSize, ImageType.JPEG, imageWidthHeight);
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -60,4 +63,11 @@ public class JdbcImageRepositoryTest {
         Assertions.assertThat(jdbcImageRepository.findByIdImageWidthHeight(image.getId()).get()).isEqualTo(imageWidthHeight);
     }
 
+    @Test
+    @DisplayName("이미지 여러장 저장 테스트")
+    void saveImagesTest() {
+        imageRepository.save(image);
+        imageRepository.save(image2);
+        Assertions.assertThat(imageRepository.findById(0L).get().size()).isEqualTo(2);
+    }
 }
