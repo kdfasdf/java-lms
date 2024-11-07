@@ -1,7 +1,6 @@
 package nextstep.courses.infrastructure;
 
 import java.util.List;
-import java.util.Optional;
 import nextstep.courses.domain.SessionRegisterInfo;
 import nextstep.courses.domain.Student;
 import nextstep.courses.domain.StudentRepository;
@@ -27,11 +26,11 @@ public class JdbcStudentRepository implements StudentRepository {
     }
 
     @Override
-    public Optional<List<Student>> findById(Long id) {
+    public List<Student> findById(Long id) {
         List<Student> selected = findByIdSelectedStudent(id);
         List<Student> unSelected = findByIdUnSelectedStudent(id);
         selected.addAll(unSelected);
-        return Optional.of(selected);
+        return selected;
     }
 
     public List<Student> findByIdSelectedStudent(Long id) {

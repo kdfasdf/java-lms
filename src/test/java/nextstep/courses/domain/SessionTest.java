@@ -25,7 +25,7 @@ public class SessionTest {
     void 선발되지_않은_학생_수강_취소() {
         Session session = Session.createPaidSession(0L, image, SessionType.PAID, SessionStatus.REGISTER, 1000L, 100,sessionDuration, SessionRegisteringStatus.OPEN);
 
-        session.getSessionRegisterInfo().addStudent(NsUserTest.JAVAJIGI);
+        session.getSessionRegisterInfo().addStudentBySelectedStatus(NsUserTest.JAVAJIGI,SelectStatus.UNSELECTED);
         session.getSessionRegisterInfo().addStudentBySelectedStatus(NsUserTest.SANJIGI, SelectStatus.SELECTED);
 
         session.getSessionRegisterInfo().removeUnselectedStudents();

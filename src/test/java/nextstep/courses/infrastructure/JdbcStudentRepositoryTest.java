@@ -37,7 +37,7 @@ public class JdbcStudentRepositoryTest {
         studentRepository.save(sessionRegisterInfo,Student.selectedStudent("0"));
         studentRepository.save(sessionRegisterInfo, Student.selectedStudent("1"));
 
-        Assertions.assertThat(studentRepository.findById(0L).get().size()).isEqualTo(2);
+        Assertions.assertThat(studentRepository.findById(0L).size()).isEqualTo(2);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class JdbcStudentRepositoryTest {
 
         studentRepository.deleteUnselectedStudent(0L);
 
-        Assertions.assertThat(studentRepository.findById(0L).get().size()).isEqualTo(1);
+        Assertions.assertThat(studentRepository.findById(0L).size()).isEqualTo(1);
     }
 
 }
