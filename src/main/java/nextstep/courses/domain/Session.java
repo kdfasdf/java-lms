@@ -55,10 +55,6 @@ public class Session {
         sessionRegisterInfo.addPaymentHistory(userId, payment, sessionId);
     }
 
-    public void removeUnselectedStudents() {
-        sessionRegisterInfo.removeUnselectedStudents();
-    }
-
     public int getNumberOfStudents() {
         return sessionRegisterInfo.getNumberOfStudents();
     }
@@ -91,6 +87,14 @@ public class Session {
         return sessionRegisterInfo;
     }
 
+    public boolean isRegistering() {
+        return sessionRegisterInfo.isRegistering();
+    }
+
+    public void addStudentBySelectedStatus(NsUser nsUser, SelectStatus selectStatus) {
+        sessionRegisterInfo.addStudentBySelectedStatus(nsUser, selectStatus);
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) {
@@ -108,4 +112,5 @@ public class Session {
     public int hashCode() {
         return Objects.hashCode(sessionId);
     }
+
 }

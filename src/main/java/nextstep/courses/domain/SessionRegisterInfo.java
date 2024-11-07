@@ -76,6 +76,10 @@ public class SessionRegisterInfo {
         return sessionRegisteringStatus;
     }
 
+    public boolean isRegistering() {
+        sessionRegisteringStatus.isOpen();
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) {
@@ -97,4 +101,5 @@ public class SessionRegisterInfo {
         result = 31 * result + Objects.hashCode(payments);
         return result;
     }
+
 }

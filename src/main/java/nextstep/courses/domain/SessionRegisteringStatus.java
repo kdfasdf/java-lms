@@ -5,9 +5,10 @@ public enum SessionRegisteringStatus {
     OPEN;
 
     public boolean isClosed() {
-        if(this == CLOSED) {
-            return true;
-        }
-        return false;
+        return this == CLOSED;
+    }
+
+    public boolean isOpen() {
+        return this == OPEN;
     }
 }
