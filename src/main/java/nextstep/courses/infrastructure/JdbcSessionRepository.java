@@ -63,9 +63,9 @@ public class JdbcSessionRepository implements SessionRepository {
 
     public SessionRegisterInfo findByIdSessionRegisterInfo(Long Id){
         String sql = "select session_id, session_status , session_register_status from session where session_id = ?;";
-        String studentSql = "select user_id from students where session_id = ?;";
+        String studentSql = "select * from students where session_id = ?;";
         String paymentSql = "select * from payments where session_id = ?;";
-        RowMapper<Student> studentMapper = (rs, rowNum) -> Student.selectedStudent("user_id");
+        RowMapper<Student> studentMapper = (rs, rowNum) -> Student.selectedStudent(rs.getString("user_id"),rs.getLong("session_id"));
         RowMapper<Payment> paymentsMapper = (rs, rowNum) ->
                 new Payment(rs.getString("user_id"), rs.getLong("session_id"),
                         rs.getLong("amount"), rs.getLong("create_at"));

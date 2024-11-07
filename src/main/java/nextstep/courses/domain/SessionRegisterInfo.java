@@ -32,14 +32,14 @@ public class SessionRegisterInfo {
     public void addStudentBySelectedStatus(NsUser nsUser, SelectStatus selectStatus) {
         checkUserAlreadyRegisterSession(nsUser);
         if(selectStatus.isSelected() ) {
-            students.addSelectedStudent(nsUser.getUserId());
+            students.addSelectedStudent(nsUser.getUserId(), sessionId);
             return;
         }
-        students.addUnSelectedStudent(nsUser.getUserId());
+        students.addUnSelectedStudent(nsUser.getUserId(), sessionId);
     }
 
     private void checkUserAlreadyRegisterSession(NsUser nsUser) {
-        if (students.getContainResult(nsUser.getUserId())) {
+        if (students.getContainResult(nsUser.getUserId(), sessionId)) {
             throw new IllegalArgumentException("이미 수업에 등록한 학생입니다");
         }
     }

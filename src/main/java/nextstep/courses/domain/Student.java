@@ -5,24 +5,27 @@ import java.util.Objects;
 public class Student {
     private final String userId;
     private SelectStatus selectedStatus = SelectStatus.UNSELECTED;
+    private final Long sessionId;
 
 
-    public static Student selectedStudent(String studentId) {
-        return new Student(studentId,SelectStatus.SELECTED);
+    public static Student selectedStudent(String studentId, Long sessionId) {
+        return new Student(studentId,SelectStatus.SELECTED, sessionId);
     }
 
-    public static Student unSelectedStudent(String studentId) {
-        return new Student(studentId);
+    public static Student unSelectedStudent(String studentId, Long sessionId) {
+        return new Student(studentId, sessionId);
     }
 
-    private Student(String userId, SelectStatus selectedStatus) {
+    private Student(String userId, SelectStatus selectedStatus, Long sessionId) {
         this.userId = userId;
         this.selectedStatus = selectedStatus;
+        this.sessionId = sessionId;
     }
 
 
-    private Student(String userId) {
+    private Student(String userId, Long sessionId) {
         this.userId = userId;
+        this.sessionId = sessionId;
     }
 
     public boolean isSelected() {

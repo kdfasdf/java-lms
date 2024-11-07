@@ -34,8 +34,8 @@ public class JdbcStudentRepositoryTest {
                 0L, SessionStatus.REGISTER, Students.from(), Payments.from(), SessionRegisteringStatus.OPEN
         );
 
-        studentRepository.save(sessionRegisterInfo,Student.selectedStudent("0"));
-        studentRepository.save(sessionRegisterInfo, Student.selectedStudent("1"));
+        studentRepository.save(sessionRegisterInfo,Student.selectedStudent("0", 0L));
+        studentRepository.save(sessionRegisterInfo, Student.selectedStudent("1", 0L));
 
         Assertions.assertThat(studentRepository.findById(0L).size()).isEqualTo(2);
     }
@@ -49,8 +49,8 @@ public class JdbcStudentRepositoryTest {
                 0L, SessionStatus.REGISTER, Students.from(), Payments.from(), SessionRegisteringStatus.OPEN
         );
 
-        studentRepository.save(sessionRegisterInfo,Student.selectedStudent("0"));
-        studentRepository.save(sessionRegisterInfo, Student.unSelectedStudent("1"));
+        studentRepository.save(sessionRegisterInfo,Student.selectedStudent("0", 0L));
+        studentRepository.save(sessionRegisterInfo, Student.unSelectedStudent("1", 0L));
 
         studentRepository.deleteUnselectedStudent(0L);
 

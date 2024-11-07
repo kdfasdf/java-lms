@@ -27,20 +27,16 @@ public class Students {
                     .collect(Collectors.toList()));
     }
 
-    @Deprecated
-    public void addStudent(String userId) {
+
+
+    public void addSelectedStudent(String userId, Long sessionId) {
         checkUserAlreadyRegisterSession(userId);
-        students.add(Student.unSelectedStudent(userId));
+        students.add(Student.selectedStudent(userId, sessionId));
     }
 
-    public void addSelectedStudent(String userId) {
+    public void addUnSelectedStudent(String userId, Long sessionId) {
         checkUserAlreadyRegisterSession(userId);
-        students.add(Student.selectedStudent(userId));
-    }
-
-    public void addUnSelectedStudent(String userId) {
-        checkUserAlreadyRegisterSession(userId);
-        students.add(Student.unSelectedStudent(userId));
+        students.add(Student.unSelectedStudent(userId, sessionId));
     }
 
     private void checkUserAlreadyRegisterSession(String userId) {
@@ -53,8 +49,8 @@ public class Students {
         return students.size();
     }
 
-    public boolean getContainResult(String userId) {
-        Student student = Student.selectedStudent(userId);
+    public boolean getContainResult(String userId, Long sessionId) {
+        Student student = Student.selectedStudent(userId, sessionId);
         return students.contains(student);
     }
 }
