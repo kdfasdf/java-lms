@@ -20,7 +20,7 @@ public class SessionRegisterInfo {
     }
 
     public void checkSessionIsOpen() {
-        if(sessionRegisteringStatus != SessionRegisteringStatus.OPEN) {
+        if(sessionRegisteringStatus.isClosed()) {
             throw new IllegalArgumentException("이 강의는 모집중인 상태가 아닙니다");
         }
     }
