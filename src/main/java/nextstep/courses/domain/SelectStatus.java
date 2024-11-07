@@ -2,6 +2,9 @@ package nextstep.courses.domain;
 
 public enum SelectStatus {
     SELECTED,
-    UNSELECTED
+    UNSELECTED;
 
+    public boolean isSelected() {
+        return this == SELECTED;
+    }
 }

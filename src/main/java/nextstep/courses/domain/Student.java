@@ -25,10 +25,7 @@ public class Student {
     }
 
     public boolean isSelected() {
-        if(selectedStatus == SelectStatus.SELECTED) {
-            return true;
-        }
-        return false;
+        return selectedStatus.isSelected();
     }
 
     public String getStudentId() {

@@ -31,7 +31,7 @@ public class SessionRegisterInfo {
 
     public void addStudentBySelectedStatus(NsUser nsUser, SelectStatus selectStatus) {
         checkUserAlreadyRegisterSession(nsUser);
-        if(selectStatus == SelectStatus.SELECTED ) {
+        if(selectStatus.isSelected() ) {
             students.addSelectedStudent(nsUser.getUserId());
             return;
         }
