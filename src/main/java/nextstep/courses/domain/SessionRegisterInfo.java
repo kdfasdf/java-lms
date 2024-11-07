@@ -29,18 +29,6 @@ public class SessionRegisterInfo {
         this.students = students.cancelRegisterWhoUnselected();
     }
 
-    @Deprecated
-    public void checkSessionIsRegistering() {
-        if (sessionStatus != SessionStatus.REGISTER) {
-            throw new IllegalArgumentException("이 강의는 지금 모집중인 상태가 아닙니다");
-        }
-    }
-    @Deprecated
-    public void addStudent(NsUser nsUser) {
-        checkUserAlreadyRegisterSession(nsUser);
-        students.addStudent(nsUser.getUserId());
-    }
-
     public void addStudentBySelectedStatus(NsUser nsUser, SelectStatus selectStatus) {
         checkUserAlreadyRegisterSession(nsUser);
         if(selectStatus == SelectStatus.SELECTED ) {
