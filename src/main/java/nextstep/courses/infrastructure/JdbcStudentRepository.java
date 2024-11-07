@@ -37,14 +37,14 @@ public class JdbcStudentRepository implements StudentRepository {
     public List<Student> findByIdSelectedStudent(Long id) {
         String sql = "select * from students where session_id = ? and selected_status = 'SELECTED'";
         RowMapper<Student> rowMapper = ((rs, rowNum)
-                -> Student.SelectedStudent(rs.getString("user_id")));
+                -> Student.selectedStudent(rs.getString("user_id")));
         return jdbcTemplate.query(sql, rowMapper, id);
     }
 
     public List<Student> findByIdUnSelectedStudent(Long id) {
         String sql = "select * from students where session_id = ? and selected_status = 'UNSELECTED'";
         RowMapper<Student> rowMapper = ((rs, rowNum)
-                -> Student.SelectedStudent(rs.getString("user_id")));
+                -> Student.selectedStudent(rs.getString("user_id")));
         return jdbcTemplate.query(sql, rowMapper, id);
     }
 

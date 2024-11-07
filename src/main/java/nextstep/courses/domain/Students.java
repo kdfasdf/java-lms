@@ -30,17 +30,17 @@ public class Students {
     @Deprecated
     public void addStudent(String userId) {
         checkUserAlreadyRegisterSession(userId);
-        students.add(Student.UnSelectedStudent(userId));
+        students.add(Student.unSelectedStudent(userId));
     }
 
     public void addSelectedStudent(String userId) {
         checkUserAlreadyRegisterSession(userId);
-        students.add(Student.SelectedStudent(userId));
+        students.add(Student.selectedStudent(userId));
     }
 
     public void addUnSelectedStudent(String userId) {
         checkUserAlreadyRegisterSession(userId);
-        students.add(Student.UnSelectedStudent(userId));
+        students.add(Student.unSelectedStudent(userId));
     }
 
     private void checkUserAlreadyRegisterSession(String userId) {
@@ -54,7 +54,7 @@ public class Students {
     }
 
     public boolean getContainResult(String userId) {
-        Student student = Student.SelectedStudent(userId);
+        Student student = Student.selectedStudent(userId);
         return students.contains(student);
     }
 }

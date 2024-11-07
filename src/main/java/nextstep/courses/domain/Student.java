@@ -6,11 +6,11 @@ public class Student {
     private final String studentId;
     private SelectStatus selectedStatus = SelectStatus.UNSELECTED;
 
-    public static Student SelectedStudent(String studentId) {
+    public static Student selectedStudent(String studentId) {
         return new Student(studentId,SelectStatus.SELECTED);
     }
 
-    public static Student UnSelectedStudent(String studentId) {
+    public static Student unSelectedStudent(String studentId) {
         return new Student(studentId);
     }
 
