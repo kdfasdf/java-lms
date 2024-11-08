@@ -77,7 +77,7 @@ public class SessionRegisterInfo {
     }
 
     public boolean isRegistering() {
-        sessionRegisteringStatus.isOpen();
+        return sessionRegisteringStatus.isOpen();
     }
 
     @Override
