@@ -3,7 +3,7 @@ package nextstep.courses.domain;
 import java.util.Objects;
 
 public class Student {
-    private final String userId;
+    private final String nsUserId;
     private SelectStatus selectedStatus = SelectStatus.UNSELECTED;
     private final Long sessionId;
 
@@ -16,15 +16,15 @@ public class Student {
         return new Student(studentId, sessionId);
     }
 
-    private Student(String userId, SelectStatus selectedStatus, Long sessionId) {
-        this.userId = userId;
+    private Student(String nsUserId, SelectStatus selectedStatus, Long sessionId) {
+        this.nsUserId = nsUserId;
         this.selectedStatus = selectedStatus;
         this.sessionId = sessionId;
     }
 
 
-    private Student(String userId, Long sessionId) {
-        this.userId = userId;
+    private Student(String nsUserId, Long sessionId) {
+        this.nsUserId = nsUserId;
         this.sessionId = sessionId;
     }
 
@@ -32,8 +32,8 @@ public class Student {
         return selectedStatus.isSelected();
     }
 
-    public String getUserId() {
-        return userId;
+    public String getNsUserId() {
+        return nsUserId;
     }
 
     public SelectStatus getSelectedStatus() {
@@ -50,11 +50,11 @@ public class Student {
         }
 
         Student student = (Student) o;
-        return Objects.equals(userId, student.userId);
+        return Objects.equals(nsUserId, student.nsUserId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(userId);
+        return Objects.hashCode(nsUserId);
     }
 }
